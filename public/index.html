@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TempChat - Secure Ephemeral Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔒 TempChat</h1>
+            <p>Secure, temporary, encrypted chat rooms</p>
+        </header>
+        
+        <div class="cards">
+            <div class="card">
+                <h2>Create Room</h2>
+                <p>Generate a temporary encrypted chat room</p>
+                <button onclick="createRoom()" class="btn-primary">Create Room</button>
+                
+                <div id="room-credentials" class="credentials" style="display:none;">
+                    <div class="credential-box">
+                        <label>Room Code</label>
+                        <span id="new-code" class="code"></span>
+                    </div>
+                    <div class="credential-box">
+                        <label>Password (15 chars)</label>
+                        <span id="new-password" class="password"></span>
+                    </div>
+                    <p class="warning">⚠️ Save this password! It will not be shown again.</p>
+                    <button onclick="copyCredentials()" class="btn-secondary">Copy Credentials</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Join Room</h2>
+                <p>Enter room credentials to join</p>
+                <input type="text" id="room-code" placeholder="Room Code" maxlength="6">
+                <input type="password" id="room-password" placeholder="Room Password">
+                <input type="text" id="username" placeholder="Your Name">
+                <button onclick="joinRoom()" class="btn-primary">Join Room</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

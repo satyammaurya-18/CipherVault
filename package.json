@@ -1,0 +1,17 @@
+{
+  "name": "tempchat",
+  "version": "1.0.0",
+  "description": "Ephemeral encrypted chat rooms",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "sql.js": "^1.10.2",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5"
+  }
+}

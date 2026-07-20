@@ -9,15 +9,20 @@
 <body>
     <div class="chat-container">
         <div class="chat-header">
-            <h2>🔐 CipherVault</h2>
-            <p class="tagline">Encrypt. Communicate. Disappear.</p>
+    <div class="header-left">
+        <h2>🔐 CipherVault</h2>
+    </div>
 
-            <div class="chat-info">
-                <span id="room-display"></span>
-                <br>
-                <span id="user-display"></span>
-            </div>
-        </div>
+    <div class="header-right">
+        <div><strong>Room ID:</strong> <span id="room-display"></span></div>
+        <div><strong>Password:</strong> <span id="password-display"></span></div>
+        <div><strong>User:</strong> <span id="user-display"></span></div>
+
+        <button id="leave-btn" class="btn-danger">
+            🚪 Leave Room
+        </button>
+    </div>
+</div>
 
         <div class="chat-main">
             <div class="messages-container" id="messages">

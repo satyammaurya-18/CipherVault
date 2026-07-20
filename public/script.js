@@ -1,3 +1,6 @@
+
+let hasLeftRoom = false;
+
 // Web Crypto API Encryption
 
 async function deriveKeyFromPassword(password) {
@@ -26,6 +29,8 @@ async function deriveKeyFromPassword(password) {
         ['encrypt', 'decrypt']
     );
 }
+
+
 
 async function encryptMessage(plaintext, password) {
     const key = await deriveKeyFromPassword(password);
@@ -137,12 +142,27 @@ if (window.location.pathname === '/chat.html') {
     const roomPassword = sessionStorage.getItem('roomPassword');
     const username = sessionStorage.getItem('username');
 
+    document.getElementById("leave-btn").addEventListener("click", leaveRoom);
+
+    function leaveRoom() {
+
+        if (hasLeftRoom) return;
+        hasLeftRoom = true;
+    
+        socket.emit("leave-room", { roomCode });
+    
+        sessionStorage.clear();
+    
+        window.location.href = "/";
+    }
+
     if (!roomCode || !roomPassword) {
         window.location.href = '/';
     }
 
-    document.getElementById('room-display').textContent = `Room: ${roomCode}`;
-    document.getElementById('user-display').textContent = `Logged in as: ${username}`;
+    document.getElementById('room-display').textContent = roomCode;
+    document.getElementById('password-display').textContent = roomPassword;
+    document.getElementById('user-display').textContent = username;
 
     // Join socket room
     socket.emit('join-room', { roomCode, username });
@@ -226,7 +246,11 @@ if (window.location.pathname === '/chat.html') {
     }
 
     // Handle page close
-    window.addEventListener('beforeunload', () => {
-        socket.emit('leave-room', { roomCode });
+    window.addEventListener("beforeunload", () => {
+
+        if (!hasLeftRoom) {
+            socket.emit("leave-room", { roomCode });
+        }
+    
     });
 }
